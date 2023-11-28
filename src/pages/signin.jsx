@@ -8,7 +8,7 @@ function Signin() {
 
   return (
     <div>
-      <div className="w-max h-max bg-slate-800/60 flex flex-col items-center justify-center fixed inset-0 m-auto text-whiteF rounded-3xl px-20 py-4">
+      <div className="w-max h-max bg-modalGray/60 flex flex-col items-center justify-center fixed inset-0 m-auto text-whiteF rounded-3xl px-20 py-4">
         <div className="bg-logoGray w-12 h-12 rounded-full mb-2.5 mt-7"></div>
         <h1 className="text-3xl mb-5">회원가입</h1>
         <div>
@@ -24,7 +24,7 @@ function Signin() {
               type="text"
               name="nickname"
               id="nickname"
-              className="block w-full rounded-md border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-whiteF text-lg"
               placeholder="사용할 닉네임"
             />
           </div> */}
@@ -33,7 +33,7 @@ function Signin() {
                 type="text"
                 name="nickname"
                 id="nickname"
-                className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
+                className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
                 placeholder="사용할 닉네임"
                 defaultValue="error nickname"
                 aria-invalid="true"
@@ -57,7 +57,7 @@ function Signin() {
             type="email"
             name="email"
             id="email"
-            className="block w-full rounded-md border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-transparent text-whiteF text-lg"
+            className="block w-full rounded-xl border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-inputBg/50 text-whiteF text-lg"
             placeholder="you@example.com"
           />
         </div> */}
@@ -66,7 +66,7 @@ function Signin() {
               type="email"
               name="email"
               id="email"
-              className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
               placeholder="you@example.com"
               defaultValue="adamwathan"
               aria-invalid="true"
@@ -94,7 +94,7 @@ function Signin() {
             type={showPW ? "text" : "password"}
             name="password"
             id="password"
-            className="block w-full rounded-md border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF text-lg"
+            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-whiteF text-lg"
             placeholder="비밀번호를 입력해주세요."
           />
           <div
@@ -118,7 +118,7 @@ function Signin() {
               type={showPW ? "text" : "password"}
               name="password"
               id="password"
-              className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
               placeholder="비밀번호를 입력해주세요."
               defaultValue="1234567"
               aria-invalid="true"
@@ -160,7 +160,7 @@ function Signin() {
             type={showVerifyPW ? "text" : "password"}
             name="verifyPassword"
             id="verifyPassword"
-            className="block w-full rounded-md border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF text-lg"
+            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-whiteF text-lg"
             placeholder="비밀번호 재입력"
           />
           <div
@@ -184,7 +184,7 @@ function Signin() {
               type={showVerifyPW ? "text" : "password"}
               name="verifyPassword"
               id="verifyPassword"
-              className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
               placeholder="비밀번호 재입력"
               defaultValue="12345678"
               aria-invalid="true"
@@ -218,7 +218,7 @@ function Signin() {
                 aria-describedby="comments-description"
                 name="comments"
                 type="checkbox"
-                className="h-4 w-4 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5 mt-0.5"
+                className="h-5 w-5 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5"
               />
               <p className="text-sm">개인정보 수집 및 이용에 동의합니다.</p>
             </div>
@@ -235,7 +235,7 @@ function Signin() {
               aria-describedby="comments-description"
               name="comments"
               type="checkbox"
-              className="h-4 w-4 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5 mt-0.5"
+              className="h-5 w-5 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5"
             />
             <p className="text-sm">만 14세 이상입니다.</p>
           </div>
