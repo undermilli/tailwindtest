@@ -1,10 +1,59 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { loginApi } from '../api/instance';
+import { useNavigate } from 'react-router-dom';
 import backdrop from '../assets/images/backdrop.png';
 import LogoIcon from '../assets/icons/LogoIcon';
 import EyeIcon from '../assets/icons/EyeIcon';
 import DeActivateIcon from '../assets/icons/deactivate';
-import { Link } from 'react-router-dom';
 
 export default function Login() {
+  const [formValues, setFormValues] = useState({
+    email: '',
+    password: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    email: '',
+    password: '',
+  });
+
+  const navigate = useNavigate();
+
+  const formInputChange = (e) => {
+    setFormValues((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const formSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const reqBody = {
+        username: formValues.email,
+        password: formValues.password,
+      };
+      const res = await loginApi.post(`/api/auth/login`, reqBody);
+      console.log(res);
+      if (res.status === 200) {
+        localStorage.setItem('accessToken', res.data.accessToken);
+        alert(`${res.data.message}`);
+        navigate('/');
+      }
+    } catch (err) {
+      const errRes = err.response;
+      if (errRes?.status === 401) {
+        if (errRes?.data.message === 'Username invalid') {
+          setFormErrors((prev) => ({ ...prev, email: 'email이 일치하지 않습니다.' }));
+          setFormErrors((prev) => ({ ...prev, password: '' }));
+        } else if (errRes?.data.message === 'Password invalid') {
+          setFormErrors((prev) => ({ ...prev, password: 'password가 일치하지 않습니다.' }));
+          setFormErrors((prev) => ({ ...prev, email: '' }));
+        }
+      }
+    }
+  };
+
   return (
     <div
       className='flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat'
@@ -18,17 +67,21 @@ export default function Login() {
             <LogoIcon />
             <div className='text-[32px]'>로그인</div>
           </div>
-          <div className='flex w-full flex-col items-center gap-y-[23px]'>
+          <form onSubmit={formSubmit} className='flex w-full flex-col items-center gap-y-[23px]'>
             <div className='flex w-full flex-col gap-y-[4px]'>
               <label htmlFor='email' className='text-[18px]'>
                 E-mail 주소
               </label>
               <input
                 id='email'
+                name='email'
                 type='text'
+                onChange={formInputChange}
                 className='h-[56px] rounded-[12px] border border-solid border-[#ffffff] bg-[#6666666E] pr-[50px]'
               />
-              <div className='mt-[3px] text-[14px] text-[#EE1D52]'>Error message</div>
+              {formErrors.email && (
+                <div className='mt-[3px] text-[14px] text-[#EE1D52]'>{formErrors.email}</div>
+              )}
             </div>
             <div className='flex w-full flex-col gap-y-[4px]'>
               <div className='flex justify-between'>
@@ -43,18 +96,25 @@ export default function Login() {
               <div className='relative flex items-center'>
                 <input
                   id='password'
+                  name='password'
                   type='text'
+                  onChange={formInputChange}
                   className='h-[56px] w-full rounded-[12px] border border-solid border-[#ffffff] bg-[#6666666E] pr-[50px]'
                 />
                 <div className='absolute right-[15px]'>
                   <EyeIcon />
                 </div>
               </div>
-              <div className='mt-[3px] text-[14px] text-[#EE1D52]'>Error message</div>
+              {formErrors.password && (
+                <div className='mt-[3px] text-[14px] text-[#EE1D52]'>{formErrors.password}</div>
+              )}
             </div>
             <div className='flex flex-col gap-y-[52px]'>
               <div className='flex flex-col gap-y-[8px]'>
-                <button className='rounded-[40px] bg-[#005F60] px-[68px] py-[21px] text-[20px]'>
+                <button
+                  type='submit'
+                  className='rounded-[40px] bg-[#005F60] px-[68px] py-[21px] text-[20px]'
+                >
                   로그인 하고 내 점수 업데이트 하기
                 </button>
                 <div className='text-center text-[14px]'>
@@ -70,7 +130,7 @@ export default function Login() {
                 <Link className='text-[14px] text-[#C9CACA] underline'>비밀번호를 잊으셨나요?</Link>
               </div>
             </div>
-          </div>
+          </form>
         </div>
         <div className='mt-[50px] flex w-full items-center gap-x-[23px] p-[20px]'>
           <div className='h-[2px] w-full bg-[#04C2C480]' />
