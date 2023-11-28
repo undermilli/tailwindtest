@@ -10,12 +10,12 @@ function Signin() {
     <div>
       <div className="w-max h-max bg-slate-800/60 flex flex-col items-center justify-center fixed inset-0 m-auto text-whiteF rounded-3xl px-20 py-4">
         <div className="bg-logoGray w-12 h-12 rounded-full mb-2.5 mt-7"></div>
-        <h1 className="text-3xl mb-7">회원가입</h1>
+        <h1 className="text-3xl mb-5">회원가입</h1>
         <div>
           <div className="m-2.5 w-96">
             <label
               htmlFor="nickname"
-              className="block text-sm font-medium leading-6 text-teal-500"
+              className="block text-lg font-medium leading-6 text-teal-500"
             >
               리더보드에서 사용할 닉네임
             </label>
@@ -24,7 +24,7 @@ function Signin() {
               type="text"
               name="nickname"
               id="nickname"
-              className="block w-full rounded-md border-0 px-1.5 py-1.5 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF"
+              className="block w-full rounded-md border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF text-lg"
               placeholder="사용할 닉네임"
             />
           </div> */}
@@ -33,14 +33,14 @@ function Signin() {
                 type="text"
                 name="nickname"
                 id="nickname"
-                className="block w-full rounded-md border-0 px-1.5 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent"
+                className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
                 placeholder="사용할 닉네임"
                 defaultValue="error nickname"
                 aria-invalid="true"
                 aria-describedby="email-error"
               />
             </div>
-            <p className="mt-0 text-sm underline text-red-500" id="email-error">
+            <p className="mt-0 text-xs underline text-red-500" id="email-error">
               Error message.
             </p>
           </div>
@@ -48,7 +48,7 @@ function Signin() {
         <div className="m-2.5 w-96">
           <label
             htmlFor="email"
-            className="block text-sm font-medium leading-6 text-teal-500"
+            className="block text-lg font-medium leading-6 text-teal-500"
           >
             E-mail 주소
           </label>
@@ -57,7 +57,7 @@ function Signin() {
             type="email"
             name="email"
             id="email"
-            className="block w-full rounded-md border-0 px-1.5 py-1.5  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-transparent text-whiteF"
+            className="block w-full rounded-md border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-transparent text-whiteF text-lg"
             placeholder="you@example.com"
           />
         </div> */}
@@ -66,14 +66,14 @@ function Signin() {
               type="email"
               name="email"
               id="email"
-              className="block w-full rounded-md border-0 px-1.5 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent"
+              className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
               placeholder="you@example.com"
               defaultValue="adamwathan"
               aria-invalid="true"
               aria-describedby="email-error"
             />
           </div>
-          <p className="mt-0 text-sm underline text-red-500" id="email-error">
+          <p className="mt-0 text-xs underline text-red-500" id="email-error">
             Not a valid email address.
           </p>
         </div>
@@ -81,7 +81,7 @@ function Signin() {
         <div className="m-2.5 w-96">
           <label
             htmlFor="password"
-            className="flex text-sm justify-between font-medium leading-6 text-teal-500"
+            className="flex text-lg justify-between font-medium leading-6 text-teal-500"
           >
             <p>비밀번호</p>
             {/* <div className="flex items-center">
@@ -94,7 +94,7 @@ function Signin() {
             type={showPW ? "text" : "password"}
             name="password"
             id="password"
-            className="block w-full rounded-md border-0 px-1.5 py-1.5 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF"
+            className="block w-full rounded-md border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF text-lg"
             placeholder="비밀번호를 입력해주세요."
           />
           <div
@@ -118,7 +118,7 @@ function Signin() {
               type={showPW ? "text" : "password"}
               name="password"
               id="password"
-              className="block w-full rounded-md border-0 px-1.5 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent"
+              className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
               placeholder="비밀번호를 입력해주세요."
               defaultValue="1234567"
               aria-invalid="true"
@@ -140,14 +140,14 @@ function Signin() {
               )}
             </div>
           </div>
-          <p className="mt-0 text-sm underline text-red-500" id="email-error">
+          <p className="mt-0 text-xs underline text-red-500" id="email-error">
             8자리 이상 입력하세요.
           </p>
         </div>
         <div className="m-2.5 w-96">
           <label
             htmlFor="verifyPassword"
-            className="flex text-sm justify-between font-medium leading-6 text-teal-500"
+            className="flex text-lg justify-between font-medium leading-6 text-teal-500"
           >
             <p>비밀번호 확인</p>
             {/* <div className="flex items-center">
@@ -160,7 +160,7 @@ function Signin() {
             type={showVerifyPW ? "text" : "password"}
             name="verifyPassword"
             id="verifyPassword"
-            className="block w-full rounded-md border-0 px-1.5 py-1.5 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF"
+            className="block w-full rounded-md border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-whiteF text-lg"
             placeholder="비밀번호 재입력"
           />
           <div
@@ -184,7 +184,7 @@ function Signin() {
               type={showVerifyPW ? "text" : "password"}
               name="verifyPassword"
               id="verifyPassword"
-              className="block w-full rounded-md border-0 px-1.5 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent"
+              className="block w-full rounded-md border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-transparent text-lg"
               placeholder="비밀번호 재입력"
               defaultValue="12345678"
               aria-invalid="true"
@@ -206,7 +206,7 @@ function Signin() {
               )}
             </div>
           </div>
-          <p className="mt-0 text-sm underline text-red-500" id="email-error">
+          <p className="mt-0 text-xs underline text-red-500" id="email-error">
             비밀번호가 일치하지 않아요.
           </p>
         </div>
@@ -243,7 +243,7 @@ function Signin() {
         <div className="m-10">
           <button
             type="button"
-            className="font-sans rounded-full bg-teal-800 px-20 py-3 text-base text-white shadow-sm hover:bg-teal-700"
+            className="h-16 font-sans rounded-full bg-teal-800 px-20 py-3 text-xl text-white shadow-sm hover:bg-teal-700"
           >
             가입하고 내 랭킹 확인하기
           </button>
