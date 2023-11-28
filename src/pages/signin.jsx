@@ -24,7 +24,7 @@ function Signin() {
               type="text"
               name="nickname"
               id="nickname"
-              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-whiteF text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
               placeholder="사용할 닉네임"
             />
           </div> */}
@@ -33,7 +33,7 @@ function Signin() {
                 type="text"
                 name="nickname"
                 id="nickname"
-                className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
+                className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
                 placeholder="사용할 닉네임"
                 defaultValue="error nickname"
                 aria-invalid="true"
@@ -57,7 +57,7 @@ function Signin() {
             type="email"
             name="email"
             id="email"
-            className="block w-full rounded-xl border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-inputBg/50 text-whiteF text-lg"
+            className="block w-full rounded-xl border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-inputBg/[0.55] text-whiteF text-lg"
             placeholder="you@example.com"
           />
         </div> */}
@@ -66,7 +66,7 @@ function Signin() {
               type="email"
               name="email"
               id="email"
-              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
               placeholder="you@example.com"
               defaultValue="adamwathan"
               aria-invalid="true"
@@ -94,7 +94,7 @@ function Signin() {
             type={showPW ? "text" : "password"}
             name="password"
             id="password"
-            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-whiteF text-lg"
+            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
             placeholder="비밀번호를 입력해주세요."
           />
           <div
@@ -118,7 +118,7 @@ function Signin() {
               type={showPW ? "text" : "password"}
               name="password"
               id="password"
-              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
               placeholder="비밀번호를 입력해주세요."
               defaultValue="1234567"
               aria-invalid="true"
@@ -160,7 +160,7 @@ function Signin() {
             type={showVerifyPW ? "text" : "password"}
             name="verifyPassword"
             id="verifyPassword"
-            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-whiteF text-lg"
+            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
             placeholder="비밀번호 재입력"
           />
           <div
@@ -184,7 +184,7 @@ function Signin() {
               type={showVerifyPW ? "text" : "password"}
               name="verifyPassword"
               id="verifyPassword"
-              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/50 text-lg"
+              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
               placeholder="비밀번호 재입력"
               defaultValue="12345678"
               aria-invalid="true"
