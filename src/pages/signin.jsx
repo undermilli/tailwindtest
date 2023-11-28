@@ -1,10 +1,56 @@
 import { useState } from "react";
 import "../index.css";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
+  const navigate = useNavigate();
+  // 비밀번호 show/hide
   const [showPW, setShowPW] = useState(false);
   const [showVerifyPW, setShowVerifyPW] = useState(false);
+
+  // input값
+  const [inputs, setInputs] = useState({
+    nickname: "",
+    email: "",
+    password: "",
+  });
+  const [verifyPW, setVerifyPW] = useState("");
+
+  const inputChangeHandler = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  const verifyPWChangeHandler = (e) => {
+    setVerifyPW(e.target.value);
+  };
+
+  // checkbox
+  const [personalInfo, setPersonalInfo] = useState(false);
+  const [fourteen, setFourteen] = useState(false);
+
+  // 회원가입
+  const signupHandler = () => {
+    axios
+      .post("http://test.ekkozulu.com:8090/api/auth/signup", {
+        username: inputs.nickname,
+        password: inputs.password,
+      })
+      .then(function (response) {
+        console.log(response);
+        alert(response.statusText);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    navigate("/");
+  };
 
   return (
     <div>
@@ -19,16 +65,17 @@ function Signin() {
             >
               리더보드에서 사용할 닉네임
             </label>
-            {/* <div className="mt-0">
-            <input
-              type="text"
-              name="nickname"
-              id="nickname"
-              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
-              placeholder="사용할 닉네임"
-            />
-          </div> */}
             <div className="mt-0">
+              <input
+                type="text"
+                name="nickname"
+                id="nickname"
+                className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
+                placeholder="사용할 닉네임"
+                onChange={inputChangeHandler}
+              />
+            </div>
+            {/* <div className="mt-0">
               <input
                 type="text"
                 name="nickname"
@@ -38,11 +85,12 @@ function Signin() {
                 defaultValue="error nickname"
                 aria-invalid="true"
                 aria-describedby="email-error"
+                onChange={inputChangeHandler}
               />
             </div>
             <p className="mt-0 text-xs underline text-red-500" id="email-error">
               Error message.
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="m-2.5 w-96">
@@ -52,16 +100,17 @@ function Signin() {
           >
             E-mail 주소
           </label>
-          {/* <div className="mt-0">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className="block w-full rounded-xl border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-inputBg/[0.55] text-whiteF text-lg"
-            placeholder="you@example.com"
-          />
-        </div> */}
-          <div className="relative mt-0 rounded-md shadow-sm">
+          <div className="mt-0">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="block w-full rounded-xl border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-inputBg/[0.55] text-whiteF text-lg"
+              placeholder="you@example.com"
+              onChange={inputChangeHandler}
+            />
+          </div>
+          {/* <div className="relative mt-0 rounded-md shadow-sm">
             <input
               type="email"
               name="email"
@@ -71,11 +120,12 @@ function Signin() {
               defaultValue="adamwathan"
               aria-invalid="true"
               aria-describedby="email-error"
+              onChange={inputChangeHandler}
             />
           </div>
           <p className="mt-0 text-xs underline text-red-500" id="email-error">
             Not a valid email address.
-          </p>
+          </p> */}
         </div>
 
         <div className="m-2.5 w-96">
@@ -87,33 +137,34 @@ function Signin() {
             {/* <div className="flex items-center">
             <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
             <p className="mx-1 text-whiteF">비밀번호 보이기</p>
-          </div> */}
+            </div> */}
           </label>
-          {/* <div className="relative mt-0 rounded-md shadow-sm">
-          <input
-            type={showPW ? "text" : "password"}
-            name="password"
-            id="password"
-            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
-            placeholder="비밀번호를 입력해주세요."
-          />
-          <div
-            className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
-            onClick={() => {
-              setShowPW(!showPW);
-            }}
-          >
-            {showPW ? (
-              <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
-            ) : (
-              <EyeSlashIcon
-                className="h-5 w-5 text-whiteF"
-                aria-hidden="true"
-              />
-            )}
-          </div>
-        </div> */}
           <div className="relative mt-0 rounded-md shadow-sm">
+            <input
+              type={showPW ? "text" : "password"}
+              name="password"
+              id="password"
+              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
+              placeholder="비밀번호를 입력해주세요."
+              onChange={inputChangeHandler}
+            />
+            <div
+              className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
+              onClick={() => {
+                setShowPW(!showPW);
+              }}
+            >
+              {showPW ? (
+                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+              ) : (
+                <EyeSlashIcon
+                  className="h-5 w-5 text-whiteF"
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+          </div>
+          {/* <div className="relative mt-0 rounded-md shadow-sm">
             <input
               type={showPW ? "text" : "password"}
               name="password"
@@ -123,6 +174,7 @@ function Signin() {
               defaultValue="1234567"
               aria-invalid="true"
               aria-describedby="email-error"
+              onChange={inputChangeHandler}
             />
             <div
               className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
@@ -142,7 +194,7 @@ function Signin() {
           </div>
           <p className="mt-0 text-xs underline text-red-500" id="email-error">
             8자리 이상 입력하세요.
-          </p>
+          </p> */}
         </div>
         <div className="m-2.5 w-96">
           <label
@@ -153,33 +205,34 @@ function Signin() {
             {/* <div className="flex items-center">
             <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
             <p className="mx-1 text-whiteF">비밀번호 보이기</p>
-          </div> */}
+            </div> */}
           </label>
-          {/* <div className="relative mt-0 rounded-md shadow-sm">
-          <input
-            type={showVerifyPW ? "text" : "password"}
-            name="verifyPassword"
-            id="verifyPassword"
-            className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
-            placeholder="비밀번호 재입력"
-          />
-          <div
-            className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
-            onClick={() => {
-              setShowVerifyPW(!showVerifyPW);
-            }}
-          >
-            {showVerifyPW ? (
-              <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
-            ) : (
-              <EyeSlashIcon
-                className="h-5 w-5 text-whiteF"
-                aria-hidden="true"
-              />
-            )}
-          </div>
-        </div> */}
           <div className="relative mt-0 rounded-md shadow-sm">
+            <input
+              type={showVerifyPW ? "text" : "password"}
+              name="verifyPassword"
+              id="verifyPassword"
+              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
+              placeholder="비밀번호 재입력"
+              onChange={verifyPWChangeHandler}
+            />
+            <div
+              className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
+              onClick={() => {
+                setShowVerifyPW(!showVerifyPW);
+              }}
+            >
+              {showVerifyPW ? (
+                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+              ) : (
+                <EyeSlashIcon
+                  className="h-5 w-5 text-whiteF"
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+          </div>
+          {/* <div className="relative mt-0 rounded-md shadow-sm">
             <input
               type={showVerifyPW ? "text" : "password"}
               name="verifyPassword"
@@ -189,6 +242,7 @@ function Signin() {
               defaultValue="12345678"
               aria-invalid="true"
               aria-describedby="email-error"
+              onChange={verifyPWChangeHandler}
             />
             <div
               className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
@@ -208,7 +262,7 @@ function Signin() {
           </div>
           <p className="mt-0 text-xs underline text-red-500" id="email-error">
             비밀번호가 일치하지 않아요.
-          </p>
+          </p> */}
         </div>
         <div>
           <div className="text-left mt-3.5 mb-3">
@@ -219,6 +273,9 @@ function Signin() {
                 name="comments"
                 type="checkbox"
                 className="h-5 w-5 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5"
+                onChange={(e) => {
+                  setPersonalInfo(e.target.checked);
+                }}
               />
               <p className="text-sm">개인정보 수집 및 이용에 동의합니다.</p>
             </div>
@@ -236,6 +293,9 @@ function Signin() {
               name="comments"
               type="checkbox"
               className="h-5 w-5 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5"
+              onChange={(e) => {
+                setFourteen(e.target.checked);
+              }}
             />
             <p className="text-sm">만 14세 이상입니다.</p>
           </div>
@@ -244,6 +304,7 @@ function Signin() {
           <button
             type="button"
             className="h-16 font-sans rounded-full bg-teal-800 px-20 py-3 text-xl text-white shadow-sm hover:bg-teal-700"
+            onClick={signupHandler}
           >
             가입하고 내 랭킹 확인하기
           </button>
