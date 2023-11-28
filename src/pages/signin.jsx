@@ -3,34 +3,10 @@ import "../index.css";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 function Signin() {
-  const OPTIONS = [
-    { value: "none", email: "메일 선택" },
-    { value: "naver", email: "naver.com" },
-    { value: "banana", email: "google.com" },
-    { value: "orange", email: "hanmail.net" },
-  ];
-
-  const SelectBox = (props) => {
-    return (
-      <select className=" w-1/2 bg-selectBoxColor text-selected text-lg outline-none rounded-xl border-2 border-inputBorder">
-        {props.options.map((option) => (
-          <option
-            key={option.value}
-            value={option.value}
-            defaultValue={props.defaultValue === option.value}
-          >
-            {option.email}
-          </option>
-        ))}
-      </select>
-    );
-  };
-
   return (
-    <div className="w-1/3 h-3/5 bg-slate-800/60 flex flex-col items-center justify-center fixed inset-0 m-auto text-whiteF rounded-3xl">
-      <button className="w-8 h-8 text-3xl absolute top-10 left-14">x</button>
-      <div className="bg-logoGray w-12 h-12 rounded-full "></div>
-      <h1 className="text-3xl">회원가입</h1>
+    <div className="w-1/3 h-4/6 bg-slate-800/60 flex flex-col items-center justify-center fixed inset-0 m-auto text-whiteF rounded-3xl">
+      <div className="bg-logoGray w-12 h-12 rounded-full mb-2.5 mt-7"></div>
+      <h1 className="text-3xl mb-7">회원가입</h1>
       <div>
         <div className="m-2.5 w-96">
           <label
@@ -77,8 +53,8 @@ function Signin() {
         >
           <p>비밀번호</p>
           <div className="flex items-center">
-            <EyeSlashIcon className="h-4 w-4 mx-1 text-whiteF" />
-            <p className="mx-1 text-whiteF">비밀번호 보이지 않기</p>
+            <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+            <p className="mx-1 text-whiteF">비밀번호 보이기</p>
           </div>
         </label>
         <div className="relative mt-0 rounded-md shadow-sm">
@@ -90,7 +66,7 @@ function Signin() {
             placeholder="8자리 이상 입력해주세요."
           />
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <EyeIcon className="h-5 w-5 text-whiteF" aria-hidden="true" />
+            <EyeSlashIcon className="h-5 w-5 text-whiteF" aria-hidden="true" />
           </div>
         </div>
       </div>
@@ -101,8 +77,8 @@ function Signin() {
         >
           <p>비밀번호 확인</p>
           <div className="flex items-center">
-            <EyeSlashIcon className="h-4 w-4 mx-1 text-whiteF" />
-            <p className="mx-1 text-whiteF">비밀번호 보이지 않기</p>
+            <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+            <p className="mx-1 text-whiteF">비밀번호 보이기</p>
           </div>
         </label>
         <div className="relative mt-0 rounded-md shadow-sm">
@@ -114,19 +90,19 @@ function Signin() {
             placeholder="비밀번호 재입력"
           />
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <EyeIcon className="h-5 w-5 text-whiteF" aria-hidden="true" />
+            <EyeSlashIcon className="h-5 w-5 text-whiteF" aria-hidden="true" />
           </div>
         </div>
       </div>
       <div>
-        <div className="text-left">
+        <div className="text-left mt-3.5 mb-3">
           <div className="flex">
             <input
               id="comments"
               aria-describedby="comments-description"
               name="comments"
               type="checkbox"
-              className="h-4 w-4 rounded border-teal-500 text-teal-500 focus:ring-teal-500"
+              className="h-4 w-4 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5 mt-0.5"
             />
             <p className="text-sm">개인정보 수집 및 이용에 동의합니다.</p>
           </div>
@@ -143,7 +119,7 @@ function Signin() {
             aria-describedby="comments-description"
             name="comments"
             type="checkbox"
-            className="h-4 w-4 rounded border-teal-500 text-teal-500 focus:ring-teal-500"
+            className="h-4 w-4 rounded border-teal-500 text-teal-500 focus:ring-teal-500 mr-1.5 mt-0.5"
           />
           <p className="text-sm">만 14세 이상입니다.</p>
         </div>

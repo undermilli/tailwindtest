@@ -11,7 +11,7 @@ export default {
         whiteF: "#ffffff",
       },
       backgroundColor: {
-        logoGray: "C4C4C4",
+        logoGray: "#C4C4C4",
       },
     },
   },
