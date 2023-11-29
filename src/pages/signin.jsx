@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Signin() {
   const navigate = useNavigate();
+
   // 비밀번호 show/hide
   const [showPW, setShowPW] = useState(false);
   const [showVerifyPW, setShowVerifyPW] = useState(false);
@@ -15,10 +16,11 @@ function Signin() {
     nickname: "",
     email: "",
     password: "",
+    verifyPassword: "",
   });
-  const [verifyPW, setVerifyPW] = useState("");
 
   const inputChangeHandler = (e) => {
+    setErrorMsg("");
     const { value, name } = e.target;
     setInputs({
       ...inputs,
@@ -26,9 +28,9 @@ function Signin() {
     });
   };
 
-  const verifyPWChangeHandler = (e) => {
-    setVerifyPW(e.target.value);
-  };
+  //errorMsg
+  const [errorType, setErrorType] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   // checkbox
   const [personalInfo, setPersonalInfo] = useState(false);
@@ -36,20 +38,25 @@ function Signin() {
 
   // 회원가입
   const signupHandler = () => {
-    axios
-      .post("http://test.ekkozulu.com:8090/api/auth/signup", {
-        username: inputs.nickname,
-        password: inputs.password,
-      })
-      .then(function (response) {
-        console.log(response);
-        alert(response.statusText);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    navigate("/");
+    if (!personalInfo || !fourteen) {
+      alert("약관 동의에 체크해주세요.");
+    } else {
+      axios
+        .post("http://test.ekkozulu.com:8090/api/auth/signup", {
+          username: inputs.nickname,
+          password: inputs.password,
+        })
+        .then(function (response) {
+          console.log(response);
+          alert(response.data.message);
+          navigate("/ex");
+        })
+        .catch(function (error) {
+          console.log(error);
+          setErrorType(error.response.data.details[0].path[0]);
+          setErrorMsg(error.response.data.details[0].message);
+        });
+    }
   };
 
   return (
@@ -65,32 +72,33 @@ function Signin() {
             >
               리더보드에서 사용할 닉네임
             </label>
-            <div className="mt-0">
+            <div className="relative mt-0 rounded-md shadow-sm">
               <input
                 type="text"
                 name="nickname"
                 id="nickname"
-                className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
+                className={`block w-full rounded-xl border-0 px-4 py-3  ring-1 ring-inset ring-teal-500 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg ${
+                  errorType === "username"
+                    ? "text-red-900 placeholder:text-red-300 pr-10"
+                    : "text-whiteF shadow-sm placeholder:text-gray-400"
+                }`}
                 placeholder="사용할 닉네임"
                 onChange={inputChangeHandler}
+                defaultValue={
+                  errorType === "username" ? `${inputs.nickname}` : ""
+                }
+                aria-invalid={errorType === "username" && "true"}
+                aria-describedby={errorType === "username" && "nickname-error"}
               />
             </div>
-            {/* <div className="mt-0">
-              <input
-                type="text"
-                name="nickname"
-                id="nickname"
-                className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
-                placeholder="사용할 닉네임"
-                defaultValue="error nickname"
-                aria-invalid="true"
-                aria-describedby="email-error"
-                onChange={inputChangeHandler}
-              />
-            </div>
-            <p className="mt-0 text-xs underline text-red-500" id="email-error">
-              Error message.
-            </p> */}
+            {errorType === "username" && (
+              <p
+                className="mt-0 text-xs underline text-red-500"
+                id="email-error"
+              >
+                {errorMsg}
+              </p>
+            )}
           </div>
         </div>
         <div className="m-2.5 w-96">
@@ -100,32 +108,29 @@ function Signin() {
           >
             E-mail 주소
           </label>
-          <div className="mt-0">
+          <div className="relative mt-0 rounded-md shadow-sm">
             <input
               type="email"
               name="email"
               id="email"
-              className="block w-full rounded-xl border-0 px-4 py-3  shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500  bg-inputBg/[0.55] text-whiteF text-lg"
+              className={`block w-full rounded-xl border-0 px-4 py-3  ring-1 ring-inset ring-teal-500 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg ${
+                errorType === "email"
+                  ? "text-red-900 placeholder:text-red-300 pr-10"
+                  : "text-whiteF shadow-sm placeholder:text-gray-400"
+              }`}
               placeholder="you@example.com"
               onChange={inputChangeHandler}
+              defaultValue={errorType === "email" ? `${inputs.email}` : ""}
+              aria-invalid={errorType === "email" && "true"}
+              aria-describedby={errorType === "email" && "email-error"}
             />
           </div>
-          {/* <div className="relative mt-0 rounded-md shadow-sm">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
-              placeholder="you@example.com"
-              defaultValue="adamwathan"
-              aria-invalid="true"
-              aria-describedby="email-error"
-              onChange={inputChangeHandler}
-            />
-          </div>
-          <p className="mt-0 text-xs underline text-red-500" id="email-error">
-            Not a valid email address.
-          </p> */}
+
+          {errorType === "email" && (
+            <p className="mt-0 text-xs underline text-red-500" id="email-error">
+              Not a valid email address.
+            </p>
+          )}
         </div>
 
         <div className="m-2.5 w-96">
@@ -144,9 +149,18 @@ function Signin() {
               type={showPW ? "text" : "password"}
               name="password"
               id="password"
-              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
+              className={`block w-full rounded-xl border-0 px-4 py-3  ring-1 ring-inset ring-teal-500 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg ${
+                errorType === "password"
+                  ? "text-red-900 placeholder:text-red-300 pr-10"
+                  : "text-whiteF shadow-sm placeholder:text-gray-400"
+              }`}
               placeholder="비밀번호를 입력해주세요."
               onChange={inputChangeHandler}
+              defaultValue={
+                errorType === "password" ? `${inputs.password}` : ""
+              }
+              aria-invalid={errorType === "password" && "true"}
+              aria-describedby={errorType === "password" && "password-error"}
             />
             <div
               className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
@@ -164,37 +178,11 @@ function Signin() {
               )}
             </div>
           </div>
-          {/* <div className="relative mt-0 rounded-md shadow-sm">
-            <input
-              type={showPW ? "text" : "password"}
-              name="password"
-              id="password"
-              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
-              placeholder="비밀번호를 입력해주세요."
-              defaultValue="1234567"
-              aria-invalid="true"
-              aria-describedby="email-error"
-              onChange={inputChangeHandler}
-            />
-            <div
-              className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
-              onClick={() => {
-                setShowPW(!showPW);
-              }}
-            >
-              {showPW ? (
-                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
-              ) : (
-                <EyeSlashIcon
-                  className="h-5 w-5 text-whiteF"
-                  aria-hidden="true"
-                />
-              )}
-            </div>
-          </div>
-          <p className="mt-0 text-xs underline text-red-500" id="email-error">
-            8자리 이상 입력하세요.
-          </p> */}
+          {errorType === "password" && (
+            <p className="mt-0 text-xs underline text-red-500" id="email-error">
+              {errorMsg}
+            </p>
+          )}
         </div>
         <div className="m-2.5 w-96">
           <label
@@ -212,9 +200,20 @@ function Signin() {
               type={showVerifyPW ? "text" : "password"}
               name="verifyPassword"
               id="verifyPassword"
-              className="block w-full rounded-xl border-0 px-4 py-3 shadow-sm ring-1 ring-inset ring-teal-500 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-whiteF text-lg"
+              className={`block w-full rounded-xl border-0 px-4 py-3  ring-1 ring-inset ring-teal-500 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg ${
+                errorType === "verifyPassword"
+                  ? "text-red-900 placeholder:text-red-300 pr-10"
+                  : "text-whiteF shadow-sm placeholder:text-gray-400"
+              }`}
               placeholder="비밀번호 재입력"
-              onChange={verifyPWChangeHandler}
+              onChange={inputChangeHandler}
+              defaultValue={
+                errorType === "verifyPassword" ? `${inputs.verifyPassword}` : ""
+              }
+              aria-invalid={errorType === "password" && "true"}
+              aria-describedby={
+                errorType === "password" && "verifyPassword-error"
+              }
             />
             <div
               className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
@@ -232,37 +231,11 @@ function Signin() {
               )}
             </div>
           </div>
-          {/* <div className="relative mt-0 rounded-md shadow-sm">
-            <input
-              type={showVerifyPW ? "text" : "password"}
-              name="verifyPassword"
-              id="verifyPassword"
-              className="block w-full rounded-xl border-0 px-4 py-3 pr-10 text-red-900 ring-1 ring-inset ring-teal-500 placeholder:text-red-300 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg"
-              placeholder="비밀번호 재입력"
-              defaultValue="12345678"
-              aria-invalid="true"
-              aria-describedby="email-error"
-              onChange={verifyPWChangeHandler}
-            />
-            <div
-              className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
-              onClick={() => {
-                setShowVerifyPW(!showVerifyPW);
-              }}
-            >
-              {showVerifyPW ? (
-                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
-              ) : (
-                <EyeSlashIcon
-                  className="h-5 w-5 text-whiteF"
-                  aria-hidden="true"
-                />
-              )}
-            </div>
-          </div>
-          <p className="mt-0 text-xs underline text-red-500" id="email-error">
-            비밀번호가 일치하지 않아요.
-          </p> */}
+          {errorType === "verifyPassword" && (
+            <p className="mt-0 text-xs underline text-red-500" id="email-error">
+              비밀번호가 일치하지 않아요.
+            </p>
+          )}
         </div>
         <div>
           <div className="text-left mt-3.5 mb-3">
