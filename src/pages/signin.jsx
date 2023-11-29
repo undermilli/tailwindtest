@@ -39,7 +39,7 @@ function Signin() {
     }
   };
 
-  // error msg return 함수
+  // errorMsg 함수
   const getErrorMsg = (msg) => {
     if (msg === '"username" is not allowed to be empty') {
       setErrorType("username");
@@ -73,10 +73,10 @@ function Signin() {
   // 회원가입
   const signupHandler = () => {
     setErrorType("");
-    if (!personalInfo || !fourteen) {
-      alert("약관 동의에 체크해주세요.");
-    } else if (inputs.password !== inputs.verifyPassword) {
+    if (inputs.password !== inputs.verifyPassword) {
       setErrorType("verifyPassword");
+    } else if (!personalInfo || !fourteen) {
+      alert("약관 동의에 체크해주세요.");
     } else {
       axios
         .post("http://test.ekkozulu.com:8090/api/auth/signup", {
@@ -91,8 +91,6 @@ function Signin() {
         .catch(function (error) {
           console.log(error);
           errorCheck(error);
-          // setErrorType(error.response.data.details[0].path[0]);
-          // setErrorMsg(error.response.data.details[0].message);
         });
     }
   };
