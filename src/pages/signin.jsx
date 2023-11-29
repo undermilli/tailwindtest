@@ -14,7 +14,6 @@ function Signin() {
   // input값
   const [inputs, setInputs] = useState({
     nickname: "",
-    email: "",
     password: "",
     verifyPassword: "",
   });
