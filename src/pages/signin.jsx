@@ -20,7 +20,6 @@ function Signin() {
   });
 
   const inputChangeHandler = (e) => {
-    setErrorMsg("");
     const { value, name } = e.target;
     setInputs({
       ...inputs,
@@ -28,9 +27,45 @@ function Signin() {
     });
   };
 
-  //errorMsg
+  // errorMsg 상태관리
   const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
+  // error 처리 함수
+  const errorCheck = (error) => {
+    if (error.response.data.errorCode === 422) {
+      getErrorMsg(error.response.data.details[0].message);
+    } else if (error.response.data.errorCode === 409) {
+      getErrorMsg(error.response.data.message);
+    }
+  };
+
+  // error msg return 함수
+  const getErrorMsg = (msg) => {
+    if (msg === '"username" is not allowed to be empty') {
+      setErrorType("username");
+      setErrorMsg("닉네임을 입력해주세요.");
+    } else if (msg === '"password" is not allowed to be empty') {
+      setErrorType("password");
+      setErrorMsg("비밀번호를 입력해주세요.");
+    } else if (msg.includes("fails to match the required pattern")) {
+      setErrorType("password");
+      setErrorMsg("비밀번호는 소문자, 대문자, 숫자를 포함한 2~20글자 입니다.");
+    } else if (msg === "Username already exists") {
+      setErrorType("username");
+      setErrorMsg("이미 존재하는 닉네임입니다.");
+    } else if (msg === '"username" length must be at least 2 characters long') {
+      setErrorType("username");
+      setErrorMsg("닉네임은 최소 2글자 이상이어야 합니다.");
+    } else if (
+      msg === '"username" must only contain alpha-numeric characters'
+    ) {
+      setErrorType("username");
+      setErrorMsg("닉네임은 영문자와 숫자로만 구성되어야 합니다.");
+    } else {
+      alert("회원가입에 실패했습니다.");
+    }
+  };
 
   // checkbox
   const [personalInfo, setPersonalInfo] = useState(false);
@@ -38,8 +73,11 @@ function Signin() {
 
   // 회원가입
   const signupHandler = () => {
+    setErrorType("");
     if (!personalInfo || !fourteen) {
       alert("약관 동의에 체크해주세요.");
+    } else if (inputs.password !== inputs.verifyPassword) {
+      setErrorType("verifyPassword");
     } else {
       axios
         .post("http://test.ekkozulu.com:8090/api/auth/signup", {
@@ -53,8 +91,9 @@ function Signin() {
         })
         .catch(function (error) {
           console.log(error);
-          setErrorType(error.response.data.details[0].path[0]);
-          setErrorMsg(error.response.data.details[0].message);
+          errorCheck(error);
+          // setErrorType(error.response.data.details[0].path[0]);
+          // setErrorMsg(error.response.data.details[0].message);
         });
     }
   };
@@ -94,45 +133,13 @@ function Signin() {
             {errorType === "username" && (
               <p
                 className="mt-0 text-xs underline text-red-500"
-                id="email-error"
+                id="nickname-error"
               >
                 {errorMsg}
               </p>
             )}
           </div>
         </div>
-        <div className="m-2.5 w-96">
-          <label
-            htmlFor="email"
-            className="block text-lg font-medium leading-6 text-teal-500"
-          >
-            E-mail 주소
-          </label>
-          <div className="relative mt-0 rounded-md shadow-sm">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              className={`block w-full rounded-xl border-0 px-4 py-3  ring-1 ring-inset ring-teal-500 focus:ring-1 focus:ring-inset focus:ring-teal-500 bg-inputBg/[0.55] text-lg ${
-                errorType === "email"
-                  ? "text-red-900 placeholder:text-red-300 pr-10"
-                  : "text-whiteF shadow-sm placeholder:text-gray-400"
-              }`}
-              placeholder="you@example.com"
-              onChange={inputChangeHandler}
-              defaultValue={errorType === "email" ? `${inputs.email}` : ""}
-              aria-invalid={errorType === "email" && "true"}
-              aria-describedby={errorType === "email" && "email-error"}
-            />
-          </div>
-
-          {errorType === "email" && (
-            <p className="mt-0 text-xs underline text-red-500" id="email-error">
-              Not a valid email address.
-            </p>
-          )}
-        </div>
-
         <div className="m-2.5 w-96">
           <label
             htmlFor="password"
@@ -179,7 +186,10 @@ function Signin() {
             </div>
           </div>
           {errorType === "password" && (
-            <p className="mt-0 text-xs underline text-red-500" id="email-error">
+            <p
+              className="mt-0 text-xs underline text-red-500"
+              id="password-error"
+            >
               {errorMsg}
             </p>
           )}
@@ -232,8 +242,11 @@ function Signin() {
             </div>
           </div>
           {errorType === "verifyPassword" && (
-            <p className="mt-0 text-xs underline text-red-500" id="email-error">
-              비밀번호가 일치하지 않아요.
+            <p
+              className="mt-0 text-xs underline text-red-500"
+              id="verifyPassword-error"
+            >
+              비밀번호가 일치하지 않습니다.
             </p>
           )}
         </div>
