@@ -41,25 +41,29 @@ function Signin() {
 
   // errorMsg 함수
   const getErrorMsg = (msg) => {
-    if (msg === '"username" is not allowed to be empty') {
+    // 에러 메시지 위치 특정
+    if (msg.includes("username") || msg.includes("Username")) {
       setErrorType("username");
+    } else if (msg.includes("password")) {
+      setErrorType("password");
+    } else {
+      alert("네트워크 오류입니다. 관리자에게 문의해주세요");
+    }
+
+    // 한글 에러 메시지 제공
+    if (msg === '"username" is not allowed to be empty') {
       setErrorMsg("닉네임을 입력해주세요.");
     } else if (msg === '"password" is not allowed to be empty') {
-      setErrorType("password");
       setErrorMsg("비밀번호를 입력해주세요.");
     } else if (msg.includes("fails to match the required pattern")) {
-      setErrorType("password");
       setErrorMsg("비밀번호는 소문자, 대문자, 숫자를 포함한 2~20글자 입니다.");
     } else if (msg === "Username already exists") {
-      setErrorType("username");
       setErrorMsg("이미 존재하는 닉네임입니다.");
     } else if (msg === '"username" length must be at least 2 characters long') {
-      setErrorType("username");
       setErrorMsg("닉네임은 최소 2글자 이상이어야 합니다.");
     } else if (
       msg === '"username" must only contain alpha-numeric characters'
     ) {
-      setErrorType("username");
       setErrorMsg("닉네임은 영문자와 숫자로만 구성되어야 합니다.");
     } else {
       alert("회원가입에 실패했습니다.");
@@ -143,10 +147,6 @@ function Signin() {
             className="flex text-lg justify-between font-medium leading-6 text-teal-500"
           >
             <p>비밀번호</p>
-            {/* <div className="flex items-center">
-            <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
-            <p className="mx-1 text-whiteF">비밀번호 보이기</p>
-            </div> */}
           </label>
           <div className="relative mt-0 rounded-md shadow-sm">
             <input
@@ -197,10 +197,6 @@ function Signin() {
             className="flex text-lg justify-between font-medium leading-6 text-teal-500"
           >
             <p>비밀번호 확인</p>
-            {/* <div className="flex items-center">
-            <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
-            <p className="mx-1 text-whiteF">비밀번호 보이기</p>
-            </div> */}
           </label>
           <div className="relative mt-0 rounded-md shadow-sm">
             <input
@@ -260,10 +256,13 @@ function Signin() {
                   setPersonalInfo(e.target.checked);
                 }}
               />
-              <p className="text-sm">개인정보 수집 및 이용에 동의합니다.</p>
+              <p className="text-sm" id="comments-description">
+                개인정보 수집 및 이용에 동의합니다.
+              </p>
             </div>
             <a
               href="http://localhost:5173/ex"
+              target="-blank"
               className="text-teal-500 text-xs ml-7 underline"
             >
               약관 자세히 보기
