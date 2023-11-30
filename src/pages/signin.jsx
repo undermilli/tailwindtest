@@ -173,10 +173,10 @@ function Signin() {
               }}
             >
               {showPW ? (
-                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+                <EyeIcon className="h-5 w-5 mx-1 text-whiteF" />
               ) : (
                 <EyeSlashIcon
-                  className="h-5 w-5 text-whiteF"
+                  className="h-5 w-5 mx-1 text-whiteF"
                   aria-hidden="true"
                 />
               )}
@@ -225,10 +225,10 @@ function Signin() {
               }}
             >
               {showVerifyPW ? (
-                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+                <EyeIcon className="h-5 w-5 mx-1 text-whiteF" />
               ) : (
                 <EyeSlashIcon
-                  className="h-5 w-5 text-whiteF"
+                  className="h-5 w-5 mx-1 text-whiteF"
                   aria-hidden="true"
                 />
               )}
