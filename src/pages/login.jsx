@@ -34,21 +34,26 @@ export default function Login() {
         password: formValues.password,
       };
       const res = await loginApi.post(`/api/auth/login`, reqBody);
-      console.log(res);
-      if (res.status === 200) {
-        localStorage.setItem('accessToken', res.data.accessToken);
-        alert(`${res.data.message}`);
+      const { code, accessToken, refreshToken } = res.data;
+      if (code === 200) {
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        alert(res.data.message);
         navigate('/');
       }
     } catch (err) {
-      const errRes = err.response;
-      if (errRes?.status === 401) {
-        if (errRes?.data.message === 'Username invalid') {
-          setFormErrors((prev) => ({ ...prev, email: 'email이 일치하지 않습니다.' }));
-          setFormErrors((prev) => ({ ...prev, password: '' }));
-        } else if (errRes?.data.message === 'Password invalid') {
-          setFormErrors((prev) => ({ ...prev, password: 'password가 일치하지 않습니다.' }));
-          setFormErrors((prev) => ({ ...prev, email: '' }));
+      const { errorCode, message, details } = err.response.data;
+      if (errorCode === 401) {
+        if (message === 'Username invalid') {
+          setFormErrors({ email: 'email이 일치하지 않습니다.', password: '' });
+        } else if (message === 'Password invalid') {
+          setFormErrors({ email: '', password: 'password가 일치하지 않습니다.' });
+        }
+      } else if (errorCode === 422) {
+        if (details[0].path[0] === 'username') {
+          setFormErrors({ email: 'email은 2글자 이상이어야 합니다.', password: '' });
+        } else if (details[0].path[0] === 'password') {
+          setFormErrors({ email: '', password: '비밀번호 조건에 맞지 않습니다.' });
         }
       }
     }
@@ -61,16 +66,19 @@ export default function Login() {
         backgroundImage: `url(${backdrop})`,
       }}
     >
-      <div className='flex h-[790px] w-[690px] flex-col items-center justify-center rounded-[24px] bg-[#80efe86b] px-[32px] leading-none text-[#ffffff]'>
+      <form
+        onSubmit={formSubmit}
+        className='flex h-[790px] w-[690px] flex-col items-center justify-center rounded-[24px] bg-[#80efe86b] px-[32px] leading-none text-[#ffffff]'
+      >
         <div className='flex w-full max-w-[500px] flex-col gap-y-[40px]'>
           <div className='flex flex-col items-center gap-y-[14px]'>
             <LogoIcon />
             <div className='text-[32px]'>로그인</div>
           </div>
-          <form onSubmit={formSubmit} className='flex w-full flex-col items-center gap-y-[23px]'>
+          <div className='flex w-full flex-col items-center gap-y-[23px]'>
             <div className='flex w-full flex-col gap-y-[4px]'>
               <label htmlFor='email' className='text-[18px]'>
-                E-mail 주소
+                닉네임
               </label>
               <input
                 id='email'
@@ -130,17 +138,20 @@ export default function Login() {
                 <Link className='text-[14px] text-[#C9CACA] underline'>비밀번호를 잊으셨나요?</Link>
               </div>
             </div>
-          </form>
+          </div>
         </div>
         <div className='mt-[50px] flex w-full items-center gap-x-[23px] p-[20px]'>
           <div className='h-[2px] w-full bg-[#04C2C480]' />
           <div className='whitespace-nowrap text-[22px] text-[#FFFFFFE5]'>처음 방문하셨나요?</div>
           <div className='h-[2px] w-full bg-[#04C2C480]' />
         </div>
-        <button className='rounded-[40px] bg-[#04C2C4] px-[116px] py-[21px] text-[21px]'>
+        <button
+          type='button'
+          className='rounded-[40px] bg-[#04C2C4] px-[116px] py-[21px] text-[21px]'
+        >
           가입하고 내 랭킹 확인하기
         </button>
-      </div>
+      </form>
     </div>
   );
 }

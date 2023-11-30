@@ -8,3 +8,20 @@ export const loginApi = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+loginApi.interceptors.request.use(
+  (config) => {
+
+
+    return config
+  }, (error) => {
+    return Promise.reject(error);
+  });
+
+loginApi.interceptors.response.use(
+  (res) => {
+
+    return res;
+  }, (error) => {
+    return Promise.reject(error);
+  });
