@@ -129,6 +129,7 @@ function Signin() {
                 }
                 aria-invalid={errorType === "username" && "true"}
                 aria-describedby={errorType === "username" && "nickname-error"}
+                autocomplete="off"
               />
             </div>
             {errorType === "username" && (
