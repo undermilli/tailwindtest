@@ -101,15 +101,12 @@ function Signin() {
 
   return (
     <div>
-      <div className="w-max h-max bg-modalGray/60 flex flex-col items-center justify-center fixed inset-0 m-auto text-whiteF rounded-3xl px-20 py-4">
-        <div className="bg-logoGray w-12 h-12 rounded-full mb-2.5 mt-7"></div>
-        <h1 className="text-3xl mb-5">회원가입</h1>
+      <div className='bg-modalGray/60 text-whiteF fixed inset-0 m-auto flex h-max w-max flex-col items-center justify-center rounded-3xl px-20 py-4'>
+        <div className='bg-logoGray mb-2.5 mt-7 h-12 w-12 rounded-full'></div>
+        <h1 className='mb-5 text-3xl'>회원가입</h1>
         <div>
-          <div className="m-2.5 w-96">
-            <label
-              htmlFor="nickname"
-              className="block text-lg font-medium leading-6 text-teal-500"
-            >
+          <div className='m-2.5 w-96'>
+            <label htmlFor='nickname' className='block text-lg font-medium leading-6 text-teal-500'>
               리더보드에서 사용할 닉네임
             </label>
             <div className="relative mt-0 rounded-md shadow-sm">
@@ -143,8 +140,8 @@ function Signin() {
         </div>
         <div className="m-2.5 w-96">
           <label
-            htmlFor="password"
-            className="flex text-lg justify-between font-medium leading-6 text-teal-500"
+            htmlFor='password'
+            className='flex justify-between text-lg font-medium leading-6 text-teal-500'
           >
             <p>비밀번호</p>
           </label>
@@ -167,18 +164,15 @@ function Signin() {
               aria-describedby={errorType === "password" && "password-error"}
             />
             <div
-              className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
+              className='pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3'
               onClick={() => {
                 setShowPW(!showPW);
               }}
             >
               {showPW ? (
-                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+                <EyeIcon className='text-whiteF mx-1 h-4 w-4' />
               ) : (
-                <EyeSlashIcon
-                  className="h-5 w-5 text-whiteF"
-                  aria-hidden="true"
-                />
+                <EyeSlashIcon className='text-whiteF h-5 w-5' aria-hidden='true' />
               )}
             </div>
           </div>
@@ -191,10 +185,10 @@ function Signin() {
             </p>
           )}
         </div>
-        <div className="m-2.5 w-96">
+        <div className='m-2.5 w-96'>
           <label
-            htmlFor="verifyPassword"
-            className="flex text-lg justify-between font-medium leading-6 text-teal-500"
+            htmlFor='verifyPassword'
+            className='flex justify-between text-lg font-medium leading-6 text-teal-500'
           >
             <p>비밀번호 확인</p>
           </label>
@@ -219,18 +213,15 @@ function Signin() {
               }
             />
             <div
-              className="pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3"
+              className='pointer-events-auto absolute inset-y-0 right-0 flex items-center pr-3'
               onClick={() => {
                 setShowVerifyPW(!showVerifyPW);
               }}
             >
               {showVerifyPW ? (
-                <EyeIcon className="h-4 w-4 mx-1 text-whiteF" />
+                <EyeIcon className='text-whiteF mx-1 h-4 w-4' />
               ) : (
-                <EyeSlashIcon
-                  className="h-5 w-5 text-whiteF"
-                  aria-hidden="true"
-                />
+                <EyeSlashIcon className='text-whiteF h-5 w-5' aria-hidden='true' />
               )}
             </div>
           </div>
@@ -244,8 +235,8 @@ function Signin() {
           )}
         </div>
         <div>
-          <div className="text-left mt-3.5 mb-3">
-            <div className="flex">
+          <div className='mb-3 mt-3.5 text-left'>
+            <div className='flex'>
               <input
                 id="comments"
                 aria-describedby="comments-description"
@@ -268,7 +259,7 @@ function Signin() {
               약관 자세히 보기
             </a>
           </div>
-          <div className="text-left flex">
+          <div className='flex text-left'>
             <input
               id="comments"
               aria-describedby="comments-description"
@@ -279,10 +270,10 @@ function Signin() {
                 setFourteen(e.target.checked);
               }}
             />
-            <p className="text-sm">만 14세 이상입니다.</p>
+            <p className='text-sm'>만 14세 이상입니다.</p>
           </div>
         </div>
-        <div className="m-10">
+        <div className='m-10'>
           <button
             type="button"
             className="h-16 font-sans rounded-full bg-teal-800 px-20 py-3 text-xl text-white shadow-sm hover:bg-teal-700"
